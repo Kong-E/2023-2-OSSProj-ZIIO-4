@@ -26,8 +26,8 @@ public class JwtUtil {
                 .compact();
     }
 
-    // Jwt 토큰에서 유저의 E-mail을 반환하는 메소드
-    public String getEmailFromToken(String token, String secretKey) {
+    // Jwt 토큰을 검증하고, 사용자의 E-mail을 반환하는 메소드
+    public String getEmailFromToken(String token) {
         try {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             Claims body = claimsJws.getBody();
@@ -37,6 +37,11 @@ public class JwtUtil {
             log.info("Invalid token.");
             return null;
         }
+    }
+
+    // 응답 헤더에서 Jwt 토큰을 반환하는 메소드
+    public String getJwtTokenFromHeader(String authorizationHeader) {
+        return authorizationHeader.substring(7);
     }
 
 }

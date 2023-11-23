@@ -2,7 +2,9 @@ package com.ziio.backend.crawler;
 
 import com.ziio.backend.service.AcademicService;
 import com.ziio.backend.service.CategoryService;
+import com.ziio.backend.service.ColorService;
 import com.ziio.backend.service.NoticeService;
+import com.ziio.backend.util.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +16,11 @@ public class CrawlerManager {
     private final AcademicCalendarWebsiteCrawler academicCalendarWebsiteCrawler;
 
     @Autowired
-    public CrawlerManager(NoticeService noticeService, AcademicService academicService, CategoryService categoryService) {
+    public CrawlerManager(NoticeService noticeService, AcademicService academicService, CategoryService categoryService,
+                          ColorService colorService, RandomUtil randomUtil) {
         this.mainWebsiteCrawler = new MainWebsiteCrawler(noticeService, categoryService);
         this.collegeAndDepartmentWebsiteCrawler = new CollegeAndDepartmentWebsiteCrawler(noticeService, categoryService);
-        this.academicCalendarWebsiteCrawler = new AcademicCalendarWebsiteCrawler(academicService);
+        this.academicCalendarWebsiteCrawler = new AcademicCalendarWebsiteCrawler(academicService, colorService, randomUtil);
         this.etcWebsiteCrawler = new EtcWebsiteCrawler(noticeService, categoryService);
     }
 

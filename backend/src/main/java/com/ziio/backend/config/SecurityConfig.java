@@ -24,16 +24,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    // 로그인 페이지는 누구나 접근 가능
-                    .antMatchers("/login/**").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
+                // 누구나 접근 가능한 엔드포인트
+                .antMatchers("/login/**").permitAll()       // 로그인 페이지
+                .antMatchers("/academics/**").permitAll()   // 학사일정 페이지
+                .antMatchers("/notices/**").permitAll()     // 공지사항 페이지
+                .antMatchers("/user/**").permitAll()        // 유저 정보 페이지
+                .anyRequest().authenticated()
+                .and()
                 // oauth 로그인 설정
                 .oauth2Login()
-                    // loginPage가 따로 없으면, 기본 페이지가 나옴
-                    .userInfoEndpoint()
-                    .userService(userService)
-                    .and()
+                // loginPage가 따로 없으면, 기본 페이지가 나옴
+                .userInfoEndpoint()
+                .userService(userService)
+                .and()
                 // 성공, 실패 핸들러 등록
                 .successHandler(oAuthLoginSuccessHandler)
                 .failureHandler(oAuthLoginFailureHandler);

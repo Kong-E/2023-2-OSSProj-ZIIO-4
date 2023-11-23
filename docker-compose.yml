@@ -25,6 +25,8 @@ services:
       MYSQL_DATABASE: ziio
       MYSQL_USER: ziio_user
       MYSQL_PASSWORD: ziio1234
+    volumes:
+      - ziio_db_data:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
@@ -32,3 +34,6 @@ services:
 
 networks:
   app-network:
+
+volumes:
+  ziio_db_data:

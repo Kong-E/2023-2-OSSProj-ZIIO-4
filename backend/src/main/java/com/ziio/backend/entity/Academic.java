@@ -1,50 +1,30 @@
 package com.ziio.backend.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+@Getter
+@Setter
 @Entity
 public class Academic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id 자동 +1
     private Long id;
 
-    private String date;
+    @Column(nullable = true)
+    private String start_date;
+
+    @Column(nullable = true)
+    private String end_date;
+
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = true)
     private String host_department;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getHost_department() {
-        return host_department;
-    }
-
-    public void setHost_department(String host_department) {
-        this.host_department = host_department;
-    }
+    @Column(nullable = false)
+    private String color_code;
 }

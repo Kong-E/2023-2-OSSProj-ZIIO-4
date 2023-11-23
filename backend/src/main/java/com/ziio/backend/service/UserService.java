@@ -19,8 +19,13 @@ public class UserService extends DefaultOAuth2UserService {
         userRepository.save(user);
     }
 
-    // 이메일로 기존에 로그인한 회원인지 찾기
+    // 이메일로 기존에 로그인한 사용자인지 찾기
     public boolean isUserExistsByEmail(String email) {
         return userRepository.findUserByEmail(email) != null;
+    }
+
+    // 이메일로 사용자를 찾아 이름을 반환
+    public String getUserNameByEmail(String email) {
+        return userRepository.findUserByEmail(email).getName();
     }
 }
